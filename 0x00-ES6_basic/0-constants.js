@@ -3,7 +3,7 @@ export function taskFirst() {
     return task;
 }
 export function getLast() {
-    return ' is okay';
+    return ' is not okay';
 }
 
 export function taskNext() {
