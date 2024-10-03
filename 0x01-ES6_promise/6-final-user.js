@@ -6,12 +6,13 @@ export default function handleProfileSignup(firstName, lastName, filename) {
     .then((results) => {
       results.forEach((result) => {
         if (result.status === 'fulfilled') {
-          return {
-            status: result.status,
-            value: result.value,
-          };
+            return {
+                status: result.status,
+                value: result.value,
+            };
+        } else {
+            return String(result.reason);
         }
-        return String(result.reason);
       });
     });
 }
