@@ -8,8 +8,8 @@ export default async function handleProfileSignup(firstName, lastName, fileName)
 
   // Use Promise.allSettled to handle both promises
   const results = await Promise.allSettled([userPromise, photoPromise]);
-    return results.map((result) => ({
-        status: result.status,
-        value: result.status === "fulfilled" ? result.value : result.reason,
-    }));
+  return results.map((result) => ({
+    status: result.status,
+    value: result.status === 'fulfilled' ? result.value : result.reason,
+  }));
 }
