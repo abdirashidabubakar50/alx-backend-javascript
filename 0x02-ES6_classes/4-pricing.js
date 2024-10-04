@@ -6,14 +6,14 @@ export default class Pricing {
       throw new TypeError('amount must be a number');
     }
 
-    if (!currency instanceof Currency) {
-      throw new TypeError('currency must be of currency type');
+    if (currency instanceof Currency === false) {
+      throw new TypeError('currency must be of Currency type');
     }
     this._amount = amount;
     this._currency = currency;
   }
 
-  // getter method for amoutn
+  // getter method for amount
   get amount() {
     return this._amount;
   }
@@ -23,10 +23,16 @@ export default class Pricing {
   }
 
   set amount(value) {
-    if (typeof amount) this._amount = value;
+    if (typeof value !== 'number') {
+      throw new Error('value must be a number');
+    }
+    this._amount = value;
   }
 
   set currency(value) {
+    if (value instanceof Currency === false) {
+      throw new TypeError('value must be of currency type');
+    }
     this._currency = value;
   }
 
