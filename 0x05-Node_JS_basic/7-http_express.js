@@ -19,27 +19,22 @@ app.get('/students', (req, res) => {
 
   const databasePath = path.resolve(process.argv[2]);
 
-  try {
-    const captureOutput = [];
-    const originalLog = console.log;
-    console.log = (message) => captureOutput.push(message);
+  const captureOutput = [];
+  const originalLog = console.log;
+  console.log = (message) => captureOutput.push(message);
 
-    countStudents(databasePath)
-      .then(() => {
-        responseMessage.push(...captureOutput);
-        res.status(200).send(responseMessage.join('\n'));
-      })
-      .catch((error) => {
-        responseMessage.push(error.message);
-        res.status(200).send(responseMessage.join('\n'));
-      })
-      .finally(() => {
-        console.log = originalLog; // Restore the original console.log
-      });
-  } catch (error) {
-    console.log = console.log;
-    res.status(500).send(error.message);
-  }
+  return countStudents(databasePath)
+    .then(() => {
+      responseMessage.push(...captureOutput);
+      res.status(200).send(responseMessage.join('\n'));
+    })
+    .catch((error) => {
+      responseMessage.push(error.message);
+      res.status(200).send(responseMessage.join('\n'));
+    })
+    .finally(() => {
+      console.log = originalLog; // Restore the original console.log
+    });
 });
 
 app.listen(port, () => {
