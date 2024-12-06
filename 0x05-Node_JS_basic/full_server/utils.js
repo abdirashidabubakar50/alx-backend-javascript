@@ -22,4 +22,4 @@ async function readDatabase(filePath) {
   }
 }
 
-module.exports = readDatabase;
+export default readDatabase;
