@@ -11,25 +11,31 @@ app.get('/', (req, res) => {
 });
 
 app.get('/students', (req, res) => {
-  const responseMessage = ['This is the list of our students'];
+  const responseMessage = ["This is the list of our students"];
 
   const databasePath = path.resolve(process.argv[2]);
 
-  const captureOutput = [];
-  const originalLog = console.log;
-  console.log = (message) => captureOutput.push(message);
+  try {
+    const captureOutput = [];
+    const originalLog = console.log;
+    console.log = (message) => captureOutput.push(message);
 
-  countStudents(databasePath)
-    .then(() => {
-      responseMessage.push(...captureOutput);
-      res.status(200).send(responseMessage.join('\n'));
-    })
-    .catch((error) => {
+    countStudents(databasePath)
+      .then(() => {
+        responseMessage.push(...captureOutput);
+        res.status(200).send(responseMessage.join("\n"));
+      })
+      .catch((error) => {
+        res.status(500).send(error.message);
+      })
+      .finally(() => {
+        console.log = originalLog; // Restore the original console.log
+      });
+  } catch (error) {
+      console.log = console.log;
       res.status(500).send(error.message);
-    })
-    .finally(() => {
-      console.log = originalLog; // Restore the original console.log
-    });
+  }
+
 });
 
 app.listen(port, () => {
