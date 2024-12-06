@@ -11,11 +11,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/students', (req, res) => {
-    const responseMessage = ["This is the list of our students"];
-    
-    if (!process.argv[2]) {
-      return res.status(500).send("Database file path is not provided");
-    }
+  const responseMessage = ['This is the list of our students'];
+
+  if (!process.argv[2]) {
+    return res.status(500).send('Database file path is not provided');
+  }
 
   const databasePath = path.resolve(process.argv[2]);
 
@@ -27,19 +27,19 @@ app.get('/students', (req, res) => {
     countStudents(databasePath)
       .then(() => {
         responseMessage.push(...captureOutput);
-        res.status(200).send(responseMessage.join("\n"));
+        res.status(200).send(responseMessage.join('\n'));
       })
       .catch((error) => {
-        res.status(500).send(error.message);
+        responseMessage.push(error.message);
+        res.status(200).send(responseMessage.join('\n'));
       })
       .finally(() => {
         console.log = originalLog; // Restore the original console.log
       });
   } catch (error) {
-      console.log = console.log;
-      res.status(500).send(error.message);
+    console.log = console.log;
+    res.status(500).send(error.message);
   }
-
 });
 
 app.listen(port, () => {
