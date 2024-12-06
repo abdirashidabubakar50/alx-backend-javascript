@@ -11,7 +11,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/students', (req, res) => {
-  const responseMessage = ["This is the list of our students"];
+    const responseMessage = ["This is the list of our students"];
+    
+    if (!process.argv[2]) {
+      return res.status(500).send("Database file path is not provided");
+    }
 
   const databasePath = path.resolve(process.argv[2]);
 
