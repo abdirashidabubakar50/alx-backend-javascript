@@ -43,7 +43,7 @@ class StudentsController {
         const responseMessage = `List: ${students.join(', ')}`;
         res.status(200).send(responseMessage);
       } else {
-        res.status(200).send('List: ');
+        res.status(404).send('Major not found');
       }
     } catch (error) {
       res.status(500).send('Cannot load the database');

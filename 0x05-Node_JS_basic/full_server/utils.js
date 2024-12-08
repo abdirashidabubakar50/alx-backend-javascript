@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 
-async function readDatabase(filePath) {
+export const readDatabase = async (filePath) => {
   try {
     const data = await fs.readFile(filePath, 'utf-8');
     const lines = data.trim().split('\n');
@@ -20,6 +20,6 @@ async function readDatabase(filePath) {
   } catch (error) {
     throw new Error('Cannot load database');
   }
-}
+};
 
-export default readDatabase;
+// export default readDatabase;
