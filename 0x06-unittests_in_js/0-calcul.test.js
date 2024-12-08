@@ -5,8 +5,8 @@ describe('calculateNumber', () => {
     it('it should return 4 when the inputs are 1 and 3', () => {
         assert.strictEqual(calculateNumber(1, 3), 4)
     });
-    it('it should return 5 when the inputs are 1 and 3.7', () => {
-        assert.strictEqual(calculateNumber(1, 3.7), 5)
+    it('it should return -5 when the inputs are -1 and -3.7', () => {
+        assert.strictEqual(calculateNumber(-1, -3.7), -5)
     });
     it("it should return 5 when the inputs are 1.2 and 3.7", () => {
       assert.strictEqual(calculateNumber(1.2, 3.7), 5);
