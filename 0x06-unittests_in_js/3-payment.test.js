@@ -4,6 +4,11 @@ const Utils = require('./utils');
 const sendPaymentRequestToApi = require('./3-payments')
 
 describe('sendPaymentRequestToApi', () => {
+
+    afterEach(() => {
+        sinon.restore();
+    });
+
     it('should validate usage of Utils.calculateNumber', () => {
         const calculateNumberSpy = sinon.spy(Utils, 'calculateNumber');
 
@@ -16,6 +21,13 @@ describe('sendPaymentRequestToApi', () => {
         // validate it was called with correct arguemtns
         expect(calculateNumberSpy.calledWith('SUM', 100, 20)).to.be.true;
 
-        calculateNumberSpy.restore();
+    });
+    it('should faild if Utils.calculateNumber is not used', () => {
+        const calculateNumberStub = sinon.stub(Utils, 'calculateNumber').throws(new Error(
+            'Function not called'
+        ));
+        const callFunctionWithoutUtils = () => sendPaymentRequestToApi(100, 20);
+
+        expect(callFunctionWithoutUtils).to.throw('Function not called');
     });
 });
