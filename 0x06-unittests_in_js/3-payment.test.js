@@ -16,10 +16,8 @@ describe('sendPaymentRequestToApi', () => {
         sendPaymentRequestToApi(100, 20);
 
         // Validate the calculateNumber was called once
-        expect(calculateNumberSpy.calledOnce).to.be.true;
-
-        // validate it was called with correct arguemtns
-        expect(calculateNumberSpy.calledWith('SUM', 100, 20)).to.be.true;
+        sinon.assert.calledOnce(calculateNumberSpy);
+        sinon.assert.calledWith(calculateNumberSpy, 'SUM', 100, 20)
 
     });
     it('should fail if Utils.calculateNumber is not used', () => {
