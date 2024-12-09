@@ -4,10 +4,6 @@ const sendPaymentRequestToApi = require('./3-payments')
 
 describe('sendPaymentRequestToApi', () => {
 
-    afterEach(() => {
-        sinon.restore();
-    });
-
     it('should validate usage of Utils.calculateNumber', () => {
         const calculateNumberSpy = sinon.spy(Utils, 'calculateNumber');
 
@@ -17,6 +13,8 @@ describe('sendPaymentRequestToApi', () => {
         // Validate the calculateNumber was called once
         sinon.assert.calledOnce(calculateNumberSpy);
         sinon.assert.calledWith(calculateNumberSpy, 'SUM', 100, 20)
+
+        calculateNumberSpy.restore();
 
     });
 });
