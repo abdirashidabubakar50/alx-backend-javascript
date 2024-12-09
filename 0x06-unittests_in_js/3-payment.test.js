@@ -22,12 +22,16 @@ describe('sendPaymentRequestToApi', () => {
         expect(calculateNumberSpy.calledWith('SUM', 100, 20)).to.be.true;
 
     });
-    it('should faild if Utils.calculateNumber is not used', () => {
-        const calculateNumberStub = sinon.stub(Utils, 'calculateNumber').throws(new Error(
-            'Function not called'
-        ));
-        const callFunctionWithoutUtils = () => sendPaymentRequestToApi(100, 20);
+    it('should fail if Utils.calculateNumber is not used', () => {
+        const calculateNumberStub = sinon.stub(Utils, 'calculateNumber')
+        
+        sendPaymentRequestToApi(100, 20);
 
-        expect(callFunctionWithoutUtils).to.throw('Function not called');
+        if (!calculateNumberStub.called) {
+            throw new Error('sendPaymentRequestApi did not use Utils.calculateNumber');
+        }
+
+
+        expect(calculateNumberStub.calledOnceWithExactly('SUM', 100, 20)).to.be.true;
     });
 });
