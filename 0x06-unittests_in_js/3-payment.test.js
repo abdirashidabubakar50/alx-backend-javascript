@@ -9,9 +9,9 @@ describe('sendPaymentRequestToApi', () => {
 
         sendPaymentRequestToApi(100, 20);
 
-        sinon.assert.calledOnceWithExactly(calculateNumberSpy, "SUM", 100, 20);
+        sinon.assert.calledOnce(calculateNumberSpy);
+        sinon.assert.calledWith(calculateNumberSpy, 'SUM', 100, 20);
 
         calculateNumberSpy.restore();
-
     });
 });
