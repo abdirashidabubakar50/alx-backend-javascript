@@ -18,8 +18,10 @@ const readDatabase = async (filePath) => {
     });
     return fields;
   } catch (error) {
-    throw new Error('Cannot load database');
+    throw new Error('Cannot load the database');
   }
 };
 
 export default readDatabase;
+
+
