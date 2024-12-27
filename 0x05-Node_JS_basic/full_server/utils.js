@@ -1,4 +1,4 @@
-import fs from 'fs';
+import {promises as fs} from 'fs';
 
 const readDatabase = async (filePath) => {
   try {
