@@ -23,5 +23,3 @@ const readDatabase = async (filePath) => {
 };
 
 export default readDatabase;
-
-
