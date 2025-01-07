@@ -16,3 +16,4 @@ describe('sendPaymentRequestToApi', () => {
         Spy.restore();
     });
 });
+
